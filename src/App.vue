@@ -1,31 +1,79 @@
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from './components/HelloWorld.vue';
+
+import axios from 'axios';
 
 export default {
     components: {
         HelloWorld,
+    },
+    data() {
+        return {
+            projects: null,
+            base_api_url: 'http://127.0.0.1:8000',
+            loading: true,
+            error: null
+        }
+    },
+
+    methods: {
+        getPosts(url) {
+            axios
+                .get(url)
+                .then(response => {
+                    console.log(response.data.results);
+                    this.projects = response.data.results.data;
+                    this.loading = false
+                })
+                .catch(error => {
+                    console.error(error)
+                    this.error = error.message
+                    this.loading = false
+                })
+        },
+        getImagePath(path) {
+            console.log(path);
+            if (path) {
+                return this.base_api_url + '/storage/' + path
+            }
+            return '/img/placeholder_600.png'
+        },
+        /**
+         * 
+         * @param {string} text the post body
+         */
+        trimBody(text) {
+            if (text.length > this.max) {
+                return text.slice(0, this.max) + '...'
+            }
+            return text
+        },
+        prevPage(url) {
+            console.log(url)
+            this.getPosts(url)
+        },
+        nextPage(url) {
+            console.log(url)
+            this.getPosts(url)
+        }
+    },
+    mounted() {
+        this.getPosts(this.base_api_url + '/api/projects');
     }
+
 }
 </script>
 
 <template>
-    <section class="vue-home">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 d-flex flex-column justify-content-center align-items-center vh-100">
-                    <div class="logos">
-                        <a href="https://vitejs.dev" target="_blank">
-                            <img src="/vite.svg" class="logo" alt="Vite logo" />
-                        </a>
-                        <a href="https://vuejs.org/" target="_blank">
-                            <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-                        </a>
-                    </div>
-                    <HelloWorld />
+    <div class="container">
+        <div class="row row-cols-5">
+            <div class="col" v-for="project in projects">
+                <div class="card">
+                    <h3>{{ project.title }}</h3>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 </template>
 
 <style lang="scss">
