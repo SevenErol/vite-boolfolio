@@ -75,6 +75,24 @@ export default {
                         <h5 class="card-title">{{ project.title }}</h5>
                         <p class="card-text" v-if="project.description">{{ trimDescription(project.description) }}</p>
                         <p class="card-text" v-else>This project has no description yet, i am sorry.</p>
+                        <div>
+                            <strong>Types:</strong>
+                            <ul>
+                                <li v-if="project.type">{{ project.type.name }}</li>
+                                <li v-else>No type for this project</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <strong>Technologies:</strong>
+
+                            <ul v-if="project.technologies.length > 0">
+                                <li v-for="technology in project.technologies">{{ technology.name }}</li>
+                            </ul>
+
+                            <p v-else>Sorry there are no technologies in this project</p>
+                        </div>
+
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>
