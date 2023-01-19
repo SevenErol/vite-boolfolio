@@ -12,7 +12,8 @@ export default {
             projects: null,
             base_api_url: 'http://127.0.0.1:8000',
             loading: true,
-            error: null
+            error: null,
+            maxLength: 100
         }
     },
 
@@ -21,7 +22,7 @@ export default {
             axios
                 .get(url)
                 .then(response => {
-                    console.log(response.data.results);
+                    console.log(response.data.results.data);
                     this.projects = response.data.results.data;
                     this.loading = false
                 })
@@ -36,15 +37,15 @@ export default {
             if (path) {
                 return this.base_api_url + '/storage/' + path
             }
-            return '/img/placeholder_600.png'
+            return '/img/no-image.png'
         },
         /**
          * 
          * @param {string} text the post body
          */
-        trimBody(text) {
-            if (text.length > this.max) {
-                return text.slice(0, this.max) + '...'
+        trimDescription(text) {
+            if (text !== null && text.length > this.maxLength) {
+                return text.slice(0, this.maxLength) + '...'
             }
             return text
         },
@@ -65,11 +66,17 @@ export default {
 </script>
 
 <template>
-    <div class="container">
-        <div class="row row-cols-5">
-            <div class="col" v-for="project in projects">
+    <div class="container p-5">
+        <div class="row">
+            <div class="col-3 d-flex gy-4" v-for="project in projects">
                 <div class="card">
-                    <h3>{{ project.title }}</h3>
+                    <img :src="getImagePath(project.cover_image)" class="card-img-top img-fluid" alt="#">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ project.title }}</h5>
+                        <p class="card-text" v-if="project.description">{{ trimDescription(project.description) }}</p>
+                        <p class="card-text" v-else>This project has no description yet, i am sorry.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -78,31 +85,4 @@ export default {
 
 <style lang="scss">
 @use './styles/general.scss';
-
-.vue-home {
-    color: #2c3e50;
-    background: #181818;
-    transition: color 0.5s, background-color 0.5s;
-    line-height: 1.6;
-    font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-        Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    font-size: 15px;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-}
-
-.logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.vue:hover {
-    filter: drop-shadow(0 0 2em #42b883aa);
-}
 </style>
