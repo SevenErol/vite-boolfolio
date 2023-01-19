@@ -9,7 +9,8 @@ export default {
             base_api_url: 'http://127.0.0.1:8000',
             loading: true,
             error: null,
-            maxLength: 100
+            maxLength: 100,
+            results: null
         }
     },
 
@@ -18,8 +19,9 @@ export default {
             axios
                 .get(url)
                 .then(response => {
-                    console.log(response.data.results.data);
+                    console.log(response.data.results);
                     this.projects = response.data.results.data;
+                    this.results = response.data.results
                     this.loading = false
                 })
                 .catch(error => {
@@ -29,7 +31,6 @@ export default {
                 })
         },
         getImagePath(path) {
-            console.log(path);
             if (path) {
                 return this.base_api_url + '/storage/' + path
             }
@@ -46,11 +47,9 @@ export default {
             return text
         },
         prevPage(url) {
-            console.log(url)
             this.getPosts(url)
         },
         nextPage(url) {
-            console.log(url)
             this.getPosts(url)
         }
     },
@@ -96,5 +95,24 @@ export default {
             </div>
         </div>
     </div>
+
+    <nav aria-label="Page navigation" class="d-flex justify-content-center pt-5">
+        <ul class="pagination    ">
+            <li class="page-item" v-if="results.prev_page_url" @click="prevPage(results.prev_page_url)">
+                <a class="page-link" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item active" aria-current="page"><a class="page-link" href="#">{{
+                results.current_page
+            }}</a></li>
+
+            <li class="page-item" v-if="results.next_page_url" @click="nextPage(results.next_page_url)">
+                <a class="page-link" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 
 </template>
