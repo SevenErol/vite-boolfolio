@@ -1,11 +1,11 @@
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import AppHeader from "./components/AppHeader.vue";
 
-import ProjectCard from "./components/ProjectCard.vue";
+import ProjectCard from "./pages/ProjectCard.vue";
 
 export default {
     components: {
-        HelloWorld,
+        AppHeader,
         ProjectCard
     }
 }
@@ -13,7 +13,11 @@ export default {
 
 <template>
 
-    <ProjectCard />
+    <AppHeader />
+
+    <router-view></router-view>
+
+    <!-- <ProjectCard /> -->
 
 </template>
 
