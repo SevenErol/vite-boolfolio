@@ -23,7 +23,7 @@ export default {
                                         class="visually-hidden">(current)</span></router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link class="nav-link" :to="{ name: 'blog' }">Blog</router-link>
+                                <router-link class="nav-link" :to="{ name: 'projects' }">Portfolio</router-link>
                             </li>
                             <li class="nav-item">
                                 <router-link class="nav-link" :to="{ name: 'about' }">About</router-link>
