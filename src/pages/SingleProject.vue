@@ -1,8 +1,11 @@
 <script>
 import axios from 'axios'
 
+import AppHeader from '../components/AppHeader.vue'
+
 export default {
     name: 'SingleProject',
+    components: { AppHeader },
     data() {
         return {
             project: null,
@@ -49,38 +52,46 @@ export default {
 </script>
 
 <template>
-    <div class="container p-5" v-if="project">
-        <div class="row">
-            <div class="col-10">
-                <h5 class="card-title">{{ project.title }}</h5>
-                <p class="card-text" v-if="project.description">{{ trimDescription(project.description) }}</p>
-                <p class="card-text" v-else>This project has no description yet, i am sorry.</p>
-                <div>
-                    <strong>Types:</strong>
-                    <ul>
-                        <li v-if="project.type">{{ project.type.name }}</li>
-                        <li v-else>No type for this project</li>
-                    </ul>
+
+    <div class="container-fluid" v-if="project">
+
+        <AppHeader />
+        <div class="container p-5">
+            <div class="row">
+                <div class="col-10">
+                    <h5 class="card-title">{{ project.title }}</h5>
+                    <p class="card-text" v-if="project.description">{{ trimDescription(project.description) }}</p>
+                    <p class="card-text" v-else>This project has no description yet, i am sorry.</p>
+                    <div>
+                        <strong>Types:</strong>
+                        <ul>
+                            <li v-if="project.type">{{ project.type.name }}</li>
+                            <li v-else>No type for this project</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <strong>Technologies:</strong>
+
+                        <ul v-if="project.technologies.length > 0">
+                            <li v-for="technology in project.technologies">{{ technology.name }}</li>
+                        </ul>
+
+                        <p v-else>Sorry there are no technologies in this project</p>
+                    </div>
                 </div>
-
-                <div>
-                    <strong>Technologies:</strong>
-
-                    <ul v-if="project.technologies.length > 0">
-                        <li v-for="technology in project.technologies">{{ technology.name }}</li>
-                    </ul>
-
-                    <p v-else>Sorry there are no technologies in this project</p>
+                <div class="col-2">
+                    <img :src="getImagePath(project.cover_image)" class="card-img-top img-fluid" :alt="project.title">
                 </div>
-            </div>
-            <div class="col-2">
-                <img :src="getImagePath(project.cover_image)" class="card-img-top img-fluid" :alt="project.title">
             </div>
         </div>
+
     </div>
 
-    <div v-else-if="message" class="d-flex justify-content-center align-items-center vh-100">
-        <h2>{{ message }}</h2>
+
+
+    <div v-else-if="message" class="d-flex justify-content-center align-items-center vh-100 bg-dark">
+        <h2 class="text-white">{{ message }}</h2>
     </div>
 
     <div v-else class="d-flex justify-content-center align-items-center vh-100">

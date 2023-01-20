@@ -1,6 +1,8 @@
 <script>
 import axios from 'axios';
 
+import AppHeader from '../components/AppHeader.vue';
+
 export default {
     name: "ProjectCard",
     data() {
@@ -13,6 +15,8 @@ export default {
             results: null
         }
     },
+
+    components: { AppHeader },
 
     methods: {
         getPosts(url) {
@@ -62,61 +66,70 @@ export default {
 
 
 <template>
-    <div class="container p-5" v-if="results">
-        <div class="row">
-            <div class="col-3 d-flex gy-4" v-for="project in projects">
-                <div class="card">
-                    <img :src="getImagePath(project.cover_image)" class="card-img-top img-fluid" alt="#">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ project.title }}</h5>
-                        <p class="card-text" v-if="project.description">{{ trimDescription(project.description) }}</p>
-                        <p class="card-text" v-else>This project has no description yet, i am sorry.</p>
-                        <div>
-                            <strong>Types:</strong>
-                            <ul>
-                                <li v-if="project.type">{{ project.type.name }}</li>
-                                <li v-else>No type for this project</li>
-                            </ul>
+
+    <div class="container-fluid" v-if="results">
+
+        <AppHeader />
+
+        <div class="container p-5">
+            <div class="row">
+                <div class="col-3 d-flex gy-4" v-for="project in projects">
+                    <div class="card">
+                        <img :src="getImagePath(project.cover_image)" class="card-img-top img-fluid" alt="#">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ project.title }}</h5>
+                            <p class="card-text" v-if="project.description">{{ trimDescription(project.description) }}
+                            </p>
+                            <p class="card-text" v-else>This project has no description yet, i am sorry.</p>
+                            <div>
+                                <strong>Types:</strong>
+                                <ul>
+                                    <li v-if="project.type">{{ project.type.name }}</li>
+                                    <li v-else>No type for this project</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <strong>Technologies:</strong>
+
+                                <ul v-if="project.technologies.length > 0">
+                                    <li v-for="technology in project.technologies">{{ technology.name }}</li>
+                                </ul>
+
+                                <p v-else>Sorry there are no technologies in this project</p>
+                            </div>
+
+                            <router-link class="btn btn-primary"
+                                :to="{ name: 'single-project', params: { id: project.id } }" aria-current="page">Read
+                                more<span class="visually-hidden">(current)</span></router-link>
                         </div>
-
-                        <div>
-                            <strong>Technologies:</strong>
-
-                            <ul v-if="project.technologies.length > 0">
-                                <li v-for="technology in project.technologies">{{ technology.name }}</li>
-                            </ul>
-
-                            <p v-else>Sorry there are no technologies in this project</p>
-                        </div>
-
-                        <router-link class="btn btn-primary"
-                            :to="{ name: 'single-project', params: { id: project.id } }" aria-current="page">Read
-                            more<span class="visually-hidden">(current)</span></router-link>
                     </div>
                 </div>
             </div>
+
+            <nav aria-label="Page navigation" class="d-flex justify-content-center pt-5">
+                <ul class="pagination    ">
+                    <li class="page-item" v-if="results.prev_page_url" @click="prevPage(results.prev_page_url)">
+                        <a class="page-link" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item active" aria-current="page"><a class="page-link" href="#">{{
+                        results.current_page
+                    }}</a></li>
+
+                    <li class="page-item" v-if="results.next_page_url" @click="nextPage(results.next_page_url)">
+                        <a class="page-link" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
         </div>
 
-        <nav aria-label="Page navigation" class="d-flex justify-content-center pt-5">
-            <ul class="pagination    ">
-                <li class="page-item" v-if="results.prev_page_url" @click="prevPage(results.prev_page_url)">
-                    <a class="page-link" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li class="page-item active" aria-current="page"><a class="page-link" href="#">{{
-                    results.current_page
-                }}</a></li>
-
-                <li class="page-item" v-if="results.next_page_url" @click="nextPage(results.next_page_url)">
-                    <a class="page-link" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
     </div>
+
 
     <div v-else class="d-flex justify-content-center align-items-center vh-100">
         <h2>Loading page ...</h2>

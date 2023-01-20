@@ -1,13 +1,16 @@
 <script>
 
+import AppHeader from '../components/AppHeader.vue';
+
 export default {
     name: 'AppHome',
-
-
+    components: { AppHeader }
 }
 </script>
 
 <template>
+
+    <AppHeader />
 
     <div class="container p-5">
         <h1>Contacts Page</h1>

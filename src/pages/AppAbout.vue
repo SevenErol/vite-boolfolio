@@ -1,13 +1,16 @@
 <script>
 
+import AppHeader from '../components/AppHeader.vue';
+
 export default {
     name: 'AppAbout',
-
-
+    components: { AppHeader }
 }
 </script>
 
 <template>
+
+    <AppHeader />
 
     <div class="container p-5">
         <h1>About Page</h1>
