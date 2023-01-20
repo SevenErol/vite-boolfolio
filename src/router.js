@@ -4,6 +4,7 @@ import ProjectCard from "./pages/ProjectCard.vue";
 import AppHome from "./pages/AppHome.vue";
 import AppAbout from "./pages/AppAbout.vue";
 import AppContacts from "./pages/AppContacts.vue";
+import SingleProject from "./pages/SingleProject.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -27,6 +28,11 @@ const router = createRouter({
             path: '/contacts',
             name: 'contacts',
             component: AppContacts
+        },
+        {
+            path: '/portfolio/:id',
+            name: 'single-project',
+            component: SingleProject
         }
     ]
 });

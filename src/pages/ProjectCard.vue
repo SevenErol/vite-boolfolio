@@ -89,7 +89,9 @@ export default {
                             <p v-else>Sorry there are no technologies in this project</p>
                         </div>
 
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <router-link class="btn btn-primary"
+                            :to="{ name: 'single-project', params: { id: project.id } }" aria-current="page">Read
+                            more<span class="visually-hidden">(current)</span></router-link>
                     </div>
                 </div>
             </div>
