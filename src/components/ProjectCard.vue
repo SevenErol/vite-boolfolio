@@ -5,7 +5,7 @@ export default {
     name: "ProjectCard",
     data() {
         return {
-            projects: null,
+            projects: [],
             base_api_url: 'http://127.0.0.1:8000',
             loading: true,
             error: null,
@@ -62,7 +62,7 @@ export default {
 
 
 <template>
-    <div class="container p-5">
+    <div class="container p-5" v-if="results">
         <div class="row">
             <div class="col-3 d-flex gy-4" v-for="project in projects">
                 <div class="card">
@@ -94,25 +94,32 @@ export default {
                 </div>
             </div>
         </div>
+
+        <nav aria-label="Page navigation" class="d-flex justify-content-center pt-5">
+            <ul class="pagination    ">
+                <li class="page-item" v-if="results.prev_page_url" @click="prevPage(results.prev_page_url)">
+                    <a class="page-link" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item active" aria-current="page"><a class="page-link" href="#">{{
+                    results.current_page
+                }}</a></li>
+
+                <li class="page-item" v-if="results.next_page_url" @click="nextPage(results.next_page_url)">
+                    <a class="page-link" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
     </div>
 
-    <nav aria-label="Page navigation" class="d-flex justify-content-center pt-5">
-        <ul class="pagination    ">
-            <li class="page-item" v-if="results.prev_page_url" @click="prevPage(results.prev_page_url)">
-                <a class="page-link" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item active" aria-current="page"><a class="page-link" href="#">{{
-                results.current_page
-            }}</a></li>
+    <div v-else class="d-flex justify-content-center align-items-center vh-100">
+        <h2>Loading page ...</h2>
+    </div>
 
-            <li class="page-item" v-if="results.next_page_url" @click="nextPage(results.next_page_url)">
-                <a class="page-link" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+
 
 </template>
