@@ -12,7 +12,7 @@ export default {
 
     <AppHeader />
 
-    <div class="container p-5">
+    <div class="container py-3">
         <h1>Home Page</h1>
         <p class="lead">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, adipisci optio, tempore maiores sit

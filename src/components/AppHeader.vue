@@ -7,10 +7,10 @@ export default {
 <template>
 
     <header>
-        <div class="container p-5">
+        <div class="container-fluid g-0">
             <nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom">
                 <div class="container">
-                    <a class="navbar-brand" href="/">Navbar</a>
+                    <a class="navbar-brand" href="/">Lorenzo</a>
                     <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
                         data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false"
                         aria-label="Toggle navigation">

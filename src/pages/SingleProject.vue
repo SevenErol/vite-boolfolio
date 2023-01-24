@@ -53,9 +53,11 @@ export default {
 
 <template>
 
+    <AppHeader />
+
     <div class="container-fluid" v-if="project">
 
-        <AppHeader />
+
         <div class="container p-5">
             <div class="row">
                 <div class="col-10">
