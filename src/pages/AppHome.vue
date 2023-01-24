@@ -6,7 +6,12 @@ import AppBanner from '../components/AppBanner.vue';
 
 export default {
     name: 'AppHome',
-    components: { AppHeader, AppBanner }
+    components: { AppHeader, AppBanner },
+    data() {
+        return {
+            message: "Hi! Welcome to my website"
+        }
+    }
 }
 </script>
 
@@ -14,7 +19,7 @@ export default {
 
     <AppHeader />
 
-    <AppBanner />
+    <AppBanner :message="message" />
 
     <section class="position-relative g-0 m-0 p-0">
 

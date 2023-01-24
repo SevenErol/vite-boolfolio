@@ -20,6 +20,9 @@ export default {
             });
         }
 
+    },
+    props: {
+        message: String
     }
 }
 </script>
@@ -51,7 +54,7 @@ export default {
 
                 <h1 class="text-center p-5">
                     <font-awesome-icon icon="fa-solid fa-code" />
-                    <span class="animate__animated animate__fadeInDown"> Hi! Welcome to my website </span>
+                    <span class="animate__animated animate__fadeInDown"> {{ message }} </span>
                     <font-awesome-icon icon="fa-solid fa-code" />
                 </h1>
 
