@@ -9,7 +9,7 @@ export default {
     components: { AppHeader, AppBanner },
     data() {
         return {
-            message: "Hi! Welcome to my website"
+            message: " Hi! Welcome to my website "
         }
     }
 }

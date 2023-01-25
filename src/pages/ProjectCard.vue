@@ -2,6 +2,7 @@
 import axios from "axios";
 
 import AppHeader from "../components/AppHeader.vue";
+import AppBanner from "../components/AppBanner.vue";
 
 export default {
   name: "ProjectCard",
@@ -13,10 +14,11 @@ export default {
       error: null,
       maxLength: 100,
       results: null,
+      message: " Personal Portfolio "
     };
   },
 
-  components: { AppHeader },
+  components: { AppHeader, AppBanner },
 
   methods: {
     getPosts(url) {
@@ -64,10 +66,21 @@ export default {
 </script>
 
 <template>
+
+  <AppHeader />
+
+  <AppBanner :message="message" />
   <div class="container-fluid" v-if="results">
-    <AppHeader />
+
 
     <div class="container p-5">
+      <h1>Personal Portfolio</h1>
+      <p class="lead">
+        Wow i gotta admit that you are very curious about me! Well here you can see a little overview of my
+        milestone works. <br>
+        P.S. these works are the ones i'm most proud of but i'm just a beginner so don't be too harsh on me :)
+      </p>
+
       <div class="row">
         <div class="col-3 d-flex gy-4" v-for="project in projects">
           <div class="card">
