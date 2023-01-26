@@ -22,20 +22,28 @@ export default {
 
     <AppBanner :message="message" />
 
-    <div class="container p-5">
-        <h1>About Page</h1>
-        <p class="lead">
-            Hey, you are still here that's great! In this section you can have an overview of all the languages i
-            learned during my journey in Boolean.
-        </p>
+    <section id="card_section">
 
-        <LanguagesList />
+        <div class="container p-5">
+            <h1>About Page</h1>
+            <p>
+                Hey, you are still here that's great! In this section you can have an overview of all the languages i
+                learned during my journey in Boolean.
+            </p>
+
+            <LanguagesList />
 
 
-    </div>
+        </div>
+
+    </section>
+
+
 </template>
 
 
 <style lang="scss" scoped>
-
+#card_section {
+    background-color: #f1f1f1;
+}
 </style>

@@ -23,7 +23,7 @@ export default {
 
     <section class="position-relative g-0 m-0 p-0">
 
-        <div class="container">
+        <div class="container text-justify">
 
             <div class="row align-items-center p-0 m-0 g-0">
 
