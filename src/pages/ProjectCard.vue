@@ -81,7 +81,7 @@ export default {
         P.S. these works are the ones i'm most proud of but i'm just a beginner so don't be too harsh on me :)
       </p>
 
-      <div class="row">
+      <div class="row animate__animated animate__fadeInDown">
         <div class="col-3 d-flex gy-4" v-for="project in projects">
           <div class="card">
             <img :src="getImagePath(project.cover_image)" class="card-img-top img-fluid" alt="#" />

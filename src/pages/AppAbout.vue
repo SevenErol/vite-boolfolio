@@ -25,13 +25,13 @@ export default {
     <section id="card_section">
 
         <div class="container p-5">
-            <h1>About Page</h1>
-            <p>
+            <h1 class="animate__animated animate__fadeInDown">About Page</h1>
+            <p class="animate__animated animate__fadeInDown">
                 Hey, you are still here that's great! In this section you can have an overview of all the languages i
                 learned during my journey in Boolean.
             </p>
 
-            <LanguagesList />
+            <LanguagesList class="animate__animated animate__fadeInDown" />
 
 
         </div>
